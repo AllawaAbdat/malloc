@@ -1,0 +1,45 @@
+##
+## Makefile for malloc in /home/allawa/C/abdat_a/malloc_ff
+## 
+## Made by ABDAT Allawa
+## Login   <abdat_a@etna-alternance.net>
+## 
+## Started on  Wed Jun 27 21:10:40 2018 ABDAT Allawa
+## Last update Tue Jul  3 20:16:14 2018 MOULINETTE Edouard
+##
+
+CC	=	gcc
+
+NAME	=	libmy_malloc_$(shell uname).so
+
+LNAME	=	libmy_malloc.so
+
+PWD	:=	`pwd`
+
+CFLAGS	=	-W -g -Iinclude/ -fPIC
+
+LDFLAGS =	-shared
+
+SRC	=	my_malloc.c \
+			my_realloc.c \
+			my_calloc.c \
+
+OBJ	=	${SRC:%.c=%.o}
+
+RM	=	rm -f
+
+all	:	${NAME}
+
+re	:	clean all
+
+$(NAME) :	$(OBJ)
+		$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
+		ln -s $(PWD)/$(NAME) $(LNAME)
+
+clean	:
+	$(RM)	$(OBJ)
+
+fclean	:	clean
+		$(RM) $(NAME) $(LNAME)
+
+.PHONY	:	all	clean	fclean
